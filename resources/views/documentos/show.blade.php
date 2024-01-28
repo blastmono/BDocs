@@ -1,4 +1,5 @@
 @extends('layouts.tabler')
+@section('ubicacion','Visor Documental')
 @section('content')
 <section class="content">
       <div class="container-fluid">
@@ -64,12 +65,8 @@
 
               <!-- /.mailbox-controls -->
               <div class="mailbox-read-message">
-
-              @if (file_exists(public_path('uploads').'/kardex/'.$documento['rutaArchivo']))
-                <iframe width="100%" height="500" src="{{asset('uploads/kardex/'. $documento->rutaArchivo)}}" frameborder="0"></iframe>
-              @else
-                <div class="alert alet-warning">No hay Archivo para mostrar.</div>
-              @endif
+              <iframe width="100%" height="500" src="{{ asset(env('MINIO_URL')).'/'.$documento->rutaArchivo}}" frameborder="0"></iframe>
+              <a href="{{ asset(env('MINIO_URL')).'/'.$documento->rutaArchivo}}" target="_blank">{{$documento->rutaArchivo}}</a>
               </div>
               <!-- /.mailbox-read-message -->
             </div>

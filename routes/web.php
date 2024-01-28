@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnuncioController;
 use App\Http\Controllers\AuditoriaController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\RegisteredUserController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\KardexController;
 use App\Http\Controllers\LoginSecurityController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\BandejaController;
+use App\Http\Controllers\CalendarioController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\TareasController;
 use App\Livewire\Counter;
@@ -118,6 +120,7 @@ Route::middleware(['2fa','auth', 'verified'])->group(function(){
     Route::get('/documentos/{id}/edit',[DocumentoController::class, 'edit'])->name('documentos.edit');
     Route::delete('/documentos/delete/{id}',[DocumentoController::class, 'destroy'])->name('documentos.destroy');
     Route::get('/notificar',[DocumentoController::class, 'enviarNotificacion'])->name('notificacion');
+    Route::post('/buscar',[DocumentoController::class, 'buscar'])->name('documentos.buscar');
 });
 
 Route::middleware(['2fa','auth', 'verified'])->group(function(){
@@ -143,6 +146,7 @@ Route::middleware(['2fa','auth', 'verified'])->group(function(){
 
 Route::middleware(['2fa','auth', 'verified'])->group(function(){
     Route::get('/tareas',[TareasController::class, 'index'])->name('tareas.index');
+    Route::post('/tarea/cumple/{id}',[TareasController::class, 'cumple'])->name('tareas.cumple');
 });
 
 Route::middleware(['2fa','auth', 'verified'])->group(function(){
@@ -167,6 +171,22 @@ Route::get('/test_middleware', function () {
 })->middleware(['auth', '2fa']);
 
 Route::get('/generaDoc',[PDFController::class, 'generatePDF']);
+
+Route::middleware(['2fa','auth', 'verified'])->group(function(){
+    Route::get('/calendario',[CalendarioController::class, 'index'])->name('calendario.index');
+    Route::get('/calendario/{month}',[CalendarioController::class, 'index_month']);
+});
+
+Route::middleware(['2fa','auth','verified'])->group(function(){
+    Route::get('/anuncios',[AnuncioController::class, 'index'])->name('anuncios.index');
+    Route::get('/anuncios/org',[AnuncioController::class, 'anuncios_organizacion'])->name('anuncios.organizacion');
+    Route::get('/anuncios/usr',[AnuncioController::class, 'anuncios_usuario'])->name('anuncios.usuarios');
+    Route::get('/anuncios/nuevo',[AnuncioController::class, 'create'])->name('anuncios.create');
+    Route::post('/anuncios/create',[AnuncioController::class, 'store'])->name('anuncios.store');
+    Route::get('anuncios/{id}',[AnuncioController::class, 'show'])->name('anuncios.show');
+    Route::delete('/anuncios/{id}/delete',[AnuncioController::class, 'destroy'])->name('anuncios.destroy');
+});
+
 
 require __DIR__.'/auth.php';
 

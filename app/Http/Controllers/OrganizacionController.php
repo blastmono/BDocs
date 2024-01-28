@@ -5,13 +5,24 @@ namespace App\Http\Controllers;
 use App\Models\Materia;
 use Illuminate\Http\Request;
 use App\Models\Organizacion;
+use stdClass;
 
 class OrganizacionController extends Controller
 {
     public function index()
     {
         $organizaciones = Organizacion::all();
-        return view('organizacion.index', compact('organizaciones'));
+        $structuredData = [];
+        foreach ($organizaciones as $item) {
+            $structuredData[] = [
+                'id' => $item['id'],
+                'parent' => $item['organizacion_id'],
+                'name' => $item['nombre'],
+                'sigla' =>$item['sigla'],
+            ];
+        }
+        $structuredData[0]['parent']=null;
+        return view('organizacion.index', compact('organizaciones','structuredData'));
     }
 
     public function create()

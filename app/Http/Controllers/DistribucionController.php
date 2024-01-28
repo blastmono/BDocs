@@ -104,7 +104,7 @@ class DistribucionController extends Controller
         event(new OrganizationMessage(Auth::user(),'Documento Despachado','Nuevo documento despachado desde.'.Auth::user()->organizacion->nombre));
         //Registra en Kardex de salida
         Log::info('['.Auth()->user()->Organizacion->sigla.'/'.Auth()->user()->rut. '] - Despacha el Documento.');
-        return redirect('documentos.index');
+        return redirect('dashboard');
     }
 
     public function show()

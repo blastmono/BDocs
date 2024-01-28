@@ -3,7 +3,10 @@
 <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}" />
 @endsection
 @section('content')
-<div class="col-12">
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <div class="col-12">
     <form method="POST" action="{{ route('documentos.store') }}" class="from-group" enctype="multipart/form-data">
 @csrf
     <input type='hidden' value={{Auth()->user()->rut}} name="rut_user" id="rut_user" />
@@ -141,6 +144,10 @@
 </form>
     
 </div>
+        </div>
+    </div>
+</div>
+
 @endsection   
 @section('script_extras')
 <script src="{{ asset('plugins/select2/js/select2.full.min.js')}}"></script>

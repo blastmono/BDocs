@@ -33,7 +33,7 @@ class PermissionSeeder extends Seeder
             'view-organizacion',
             'create-organizacion',
             'edit-organizacion',
-            'delete-organizacion',      
+            'delete-organizacion',
             //Auditoria
             'view-auditoria',
             //distribucion
@@ -60,6 +60,7 @@ class PermissionSeeder extends Seeder
             'create-tareas',
             'edit-tareas',
             'delete-tareas',
+            'cumple-tareas',
             //
 
         ];

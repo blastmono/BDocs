@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('sigla');
             $table->string('nombre');
-            $table->foreignIdFor((Organizacion::class))->default(1); //dependencia
+            $table->foreignIdFor((Organizacion::class))->nullable()->default(1);
             $table->timestamps();
         });
     }

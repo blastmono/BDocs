@@ -1,108 +1,116 @@
 @extends('layouts.tabler')
-@section('ubicacion','Bandeja de Entrada')
+@section('ubicacion','Documento')
 @section('content')
-<div style="width: 216mm; height:279mm;" class="border"> <!-- 216 x 279 -->
-  <div class="row" style="margin-top: 1cm; margin-right:1cm;margin-left:4cm;">
-    <div class="col-6">
-      <p class="text-left border mb-0">REPUBLICA DE CHILE</p>
-      <p style="margin-left: -4cm;" class="text-center border mb-0">MINISTERIO DE DEFENSA NACIONAL</p>
-      <p style="margin-left: -4cm;" class="text-center border">Estado Mayor Conjunto</p>
-    </div>
-    <div class="col-6 text-end">EJEMPLAR Nº___/___/ HOJA Nº___/___/</div>
-  </div>
-  <div class="row" style="margin-right:1cm; margin-left:4cm;">
-    <div class="col-12 text-center" class>
-      <strong>MEMORÁNDUM</strong>
-    </div>
-  </div>
-  <div class="row" style="margin-top: 1cm; margin-right:1cm;margin-left:4cm;">
-      <div class="col-4 border">
-       TRÁMITE: NORMAL
-      </div>
-    <div class="col-3 border">
-      <div class="row">
-        <div class="col-5">
-          <strong>FECHA:</strong>
+<body>
+      <div class="page-wrapper">
+        <!-- Page header -->
+        <div class="page-header d-print-none">
+          <div class="container-xl">
+            <div class="row g-2 align-items-center">
+              <!-- Page title actions -->
+              <div class="col-auto ms-auto d-print-none">
+                <button type="button" class="btn btn-primary" onclick="javascript:window.print();">
+                  <!-- Download SVG icon from http://tabler-icons.io/i/printer -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17 17h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2" /><path d="M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4" /><path d="M7 13m0 2a2 2 0 0 1 2 -2h6a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-6a2 2 0 0 1 -2 -2z" /></svg>
+                  Guardar Documento
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-6 text-right">
-          <p>19ENE2024</p>
+        <!-- Page body -->
+        <div class="page-body border" style="width: 216mm; height:279mm;">
+          <div class="container">
+            <div class="card card-lg">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12 text-center text-danger"><h1>SECRETO</h1></div>
+                </div>
+                <div class="row">
+                  <div class="col-6 border text-center">
+                    <p class="h3 mb-0">REPUBLICA DE CHILE</p>
+                    <p class="h3 mb-0">MINISTERIO DE DEFENSA NACIONAL</p>
+                    <p class="h3 mb-0">Estado Mayor Conjunto</p>
+                  </div>
+                  <div class="col-6 text-end border">
+                    <p class="h3">EJEMPLAR Nº __/___/ HOJA Nº__/___/</p>
+                  </div>
+                  <div class="col-12 mt-3 text-center">
+                    <h2>MEMORÁNDUM</h2>
+                  </div>
+                </div>
+                <div class="row text-center">
+                  <div class="col-4"> <strong>TRÁMITE:</strong> NORMAL</div>
+                  <div class="col-4"></div>
+                  <div class="col-4"></div>
+                </div>
+                <table class="table table-transparent table-responsive">
+                  <thead>
+                    <tr>
+                      <th class="text-center" style="width: 1%"></th>
+                      <th>Product</th>
+                      <th class="text-center" style="width: 1%">Qnt</th>
+                      <th class="text-end" style="width: 1%">Unit</th>
+                      <th class="text-end" style="width: 1%">Amount</th>
+                    </tr>
+                  </thead>
+                  <tr>
+                    <td class="text-center">1</td>
+                    <td>
+                      <p class="strong mb-1">Logo Creation</p>
+                      <div class="text-muted">Logo and business cards design</div>
+                    </td>
+                    <td class="text-center">
+                      1
+                    </td>
+                    <td class="text-end">$1.800,00</td>
+                    <td class="text-end">$1.800,00</td>
+                  </tr>
+                  <tr>
+                    <td class="text-center">2</td>
+                    <td>
+                      <p class="strong mb-1">Online Store Design &amp; Development</p>
+                      <div class="text-muted">Design/Development for all popular modern browsers</div>
+                    </td>
+                    <td class="text-center">
+                      1
+                    </td>
+                    <td class="text-end">$20.000,00</td>
+                    <td class="text-end">$20.000,00</td>
+                  </tr>
+                  <tr>
+                    <td class="text-center">3</td>
+                    <td>
+                      <p class="strong mb-1">App Design</p>
+                      <div class="text-muted">Promotional mobile application</div>
+                    </td>
+                    <td class="text-center">
+                      1
+                    </td>
+                    <td class="text-end">$3.200,00</td>
+                    <td class="text-end">$3.200,00</td>
+                  </tr>
+                  <tr>
+                    <td colspan="4" class="strong text-end">Subtotal</td>
+                    <td class="text-end">$25.000,00</td>
+                  </tr>
+                  <tr>
+                    <td colspan="4" class="strong text-end">Vat Rate</td>
+                    <td class="text-end">20%</td>
+                  </tr>
+                  <tr>
+                    <td colspan="4" class="strong text-end">Vat Due</td>
+                    <td class="text-end">$5.000,00</td>
+                  </tr>
+                  <tr>
+                    <td colspan="4" class="font-weight-bold text-uppercase text-end">Total Due</td>
+                    <td class="font-weight-bold text-end">$30.000,00</td>
+                  </tr>
+                </table>
+                <p class="text-muted text-center mt-5">Thank you very much for doing business with us. We look forward to working with
+                  you again!</p>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="col-5 border"> CLASIF: (P) Nº______/______/</div>
-  </div>
-  <div class="row mt-3" style="margin-right:1cm;margin-left:4cm;">
-    <div class="col-4"></div>
-    <div class="col-3"></div>
-    <div class="col-5 border">
-      <div class="row">
-        <div class="col-3 border">REF.:</div>
-        <div class="col-9 border text-wrap" style="word-break:break-all;">
-          gdfghfdnkjdfhndksjnlaskdnjklasnlaksdnlsadnlaskdnlasdnlasndlkasndlkasndlkasnldka
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row" style="margin-top: 1cm; margin-right:1cm;margin-left:4cm;">
-    <div class="col-12"> <strong>DEL:</strong>  </div>
-    <div class="col-12 mt-3"> <strong>AL:</strong>  </div>
-    <div class="col-12 mt-3"> <strong>C/I:</strong>  </div>
-  </div>
-  <div class="row" style="margin-top: 1cm; margin-right:1cm;margin-left:4cm;">
-    <div style="border-top: 1px solid black; height: 3px;">   </div>
-  </div>
-  <div class="row mt-0">
-    <div class="col-6 mt-0 border" style="margin-right:1cm;margin-left:4cm;">
-    <strong>TEXTO:</strong>  
-    </div>
-  </div>
-  <div class="row mt-0" style="margin-right:1cm;margin-left:4cm;">
-    <div class="col-12">
-      <p class="text-center"><strong>TEXT</strong></p>
-    </div>
-  </div>
-  <div class="row mt-2" style="margin-right:1cm;margin-left:4cm;">
-    <div class="col-1">
-      <p class="">1.</p>
-    </div>
-    <div class="col-10">
-      <p class="" style="word-break:break-all;">Conforme a lo solicitado mediante documento de la referencia es que se solicita a ud.............</p>
-    </div>
-  </div>
-  <div class="row mt-2" style="margin-right:1cm;margin-left:4cm;">
-    <div class="col-1">
-      <p class="">2.</p>
-    </div>
-    <div class="col-10">
-      <p class="" style="word-break:break-all;">Conforme a lo solicitado mediante documento de la referencia es que se solicita a ud.............</p>
-    </div>
-  </div>
-  <div class="row mt-2" style="margin-right:1cm;margin-left:4cm;">
-    <div class="col-1">
-      <p class="">3.</p>
-    </div>
-    <div class="col-10">
-      <p class="" style="word-break:break-all;">Conforme a lo solicitado mediante documento de la referencia es que se solicita a ud.............</p>
-    </div>
-  </div>
-  <div class="row mt-4" style="margin-right:1cm;margin-left:4cm;">
-    <div class="col-12 text-center">
-      <p class="text-center border mb-0 text-uppercase">Marco Miranda Morales</p>
-      <p class="text-center border mb-0">Capitán</p>
-      <p class="text-center border">Jefe Seccion Sistemas TI</p>
-    </div>
-  </div>
-  <div class="row" style="margin-top: 1cm; margin-right:1cm;margin-left:4cm;">
-    <div style="border-top: 1px solid black; height: 3px;">   </div>
-  </div>
-  <div class="row mt-0 mb-0" style="margin-right:1cm;margin-left:4cm;">
-    <div class="col-6">
-      <strong>ORIGEN:</strong> DIPRO/DTE/SSIT/CAP.MMM
-    </div>
-    <div class="col-6 text-center ">
-      <p class="text-center mb-0">FIRMA, NOMRE</p>
-      <p class="text-center mb-0">TIMBRE, GRADO</p>
-    </div>
-  </div>
-</div>
 @endsection

@@ -17,7 +17,7 @@ class OrganizacionSeeder extends Seeder
         Organizacion::factory()->create([
             'sigla'=>'MDN',
             'nombre'=>'Ministerio de Defensa Nacional',
-            'organizacion_id' => 1,
+            'organizacion_id' => null,
         ]);
         Organizacion::factory()->create([
             'sigla'=>'EMCO',

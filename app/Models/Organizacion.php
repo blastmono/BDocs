@@ -10,6 +10,7 @@ class Organizacion extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'sigla',
         'nombre',
         'organizacion_id'
@@ -18,5 +19,10 @@ class Organizacion extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function organizacion()
+    {
+        return $this->belongsTo(Organizacion::class);
     }
 }

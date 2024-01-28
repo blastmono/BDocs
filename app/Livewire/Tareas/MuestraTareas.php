@@ -8,6 +8,7 @@ use Livewire\Component;
 
 class MuestraTareas extends Component
 {
+    
     protected $listeners = ['refreshComponent' => '$refresh'];
 
     public $documento;

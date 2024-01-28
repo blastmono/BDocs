@@ -25,10 +25,11 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Storage;
 
 class DocumentoController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
         $this->middleware('auth');
         $this->middleware('permission:view-document|create-document|edit-document|delete-document',['only' => ['index','show']]);
@@ -87,12 +88,13 @@ class DocumentoController extends Controller
                 ));
     }
 
-    public function store(Request $request){
-
-        $filename = time().'.'.$request->file->extension(); 
-
-        $request->file->move(public_path('uploads/kardex/'),$filename);
-
+    public function store(Request $request)
+    {
+        $archivo = $request->file;
+        $filename = time().'.'.$request->file->extension();
+        $contenido = file_get_contents($archivo);
+        $path = Storage::disk('minio')->put($filename,$contenido);
+        //$request->file->move(public_path('uploads/kardex/'),$filename);
         //Agrega el documento al sistema
         Documento::create([
             'materia_id' => $request->materia_id,
@@ -114,7 +116,7 @@ class DocumentoController extends Controller
                      Ha ingresado el documento['.$request->num_doc.']';
         event(new PrivateMessage(Auth::user(),'Documento Registrado','El Documento ha sido ingresado con exito.'));
         Log::info($mensajeFinal);
-        return view('documentos.index')->with('Documento agregado con exito.');
+        return redirect('dashboard')->with('Documento agregado con exito.');
     }
 
     public function show($id, $dist = null){
@@ -219,5 +221,19 @@ class DocumentoController extends Controller
         {
             Log::critical('El documento no pudo ser registrado en el KARDEX de ENTRADA.' .$ex);
         }
+    }
+
+    public function buscar(Request $request)
+    {
+        //Separa el codigo de la materia
+        $elementos = explode('/',$request->documento);
+        //obtiene la ID de la materia a buscar
+        $materia = Materia::select('id')->where('codigo',$elementos[0]);
+        //se obtiene el documento en base al id del documento y el numero del documento propiamente tal
+        $documento = Documento::select('id')->where('materia_id',$materia)->where('num_doc',$elementos[1])->first();
+            $this->show($documento);
+        
+        //obtenido los datos se ejecuta la vista
+        
     }
 }
