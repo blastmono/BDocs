@@ -1,6 +1,8 @@
 @extends('layouts.tabler')
 @section('css_extras')
 <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}" />
+<link rel="stylesheet" href="{{ asset('plugins/summernote/summernote.css') }}" />
+
 @endsection
 @section('content')
 <div class="container">
@@ -101,7 +103,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-12">
+        <div class="col-6">
             <div class="form-group">
                 <label for="objeto">Objeto</label>
                 <input type="text" class="form-control" id="objeto" name="objeto">
@@ -114,6 +116,7 @@
                 <label for="inputPassword4">Firmante</label>
                 <div>
                     <select id="user_id" class="form-control js-basic-sel2" name="firmante" :value="old('firmante')">
+                        <option selected>Seleccione Opcion</option>
                     @foreach ($usuarios as $usuario)
                         <option value="{{$usuario->id}}">{{$usuario->grado}}. {{$usuario->apellidoPaterno}} {{$usuario->apellidoMaterno}} {{$usuario->nombres}}</option>
                     @endforeach
@@ -139,6 +142,7 @@
                     <input class="form-control" type="file" id="file" name="file">
                 </div>
         </div>
+
     </div>
   <button type="submit" class="btn btn-info mt-2">Agregar</button>
 </form>
@@ -148,12 +152,20 @@
     </div>
 </div>
 
-@endsection   
+@endsection
 @section('script_extras')
 <script src="{{ asset('plugins/select2/js/select2.full.min.js')}}"></script>
+<script src="{{ asset('plugins/summernote/summernote.js')}}"></script>
 <script>
     jQuery(document).ready(function() {
-        $('.js-basic-sel2').select2();
+        $('.js-basic-sel2').select2({
+            placeholder: "Seleccione una opcion..."
+        });
+        $('.js-example-basic-multiple').select2({
+            placeholder: "Seleccione una opcion...",
+            maximumSelectionLength: 3
+        });
+        $('.summernote').summernote();
     });
 </script>
 

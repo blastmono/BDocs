@@ -74,7 +74,7 @@
     $(document).ready(function() {
         $('.js-basic-sel2').select2({
             placeholder: "Seleccione una opcion...",
-            maximumSelectionLength: <?= json_encode($documento->ejemplares) ?> 
+            maximumSelectionLength: <?= json_encode($documento->ejemplares) ?>
         });
     });
 </script>

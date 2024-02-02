@@ -11,6 +11,7 @@ use App\Models\Estado;
 use App\Models\Kardex;
 use App\Models\Materia;
 use App\Models\Organizacion;
+use App\Models\Referencias;
 use App\Models\User;
 use App\Models\Seguimiento;
 use App\Models\tipoDocumento;
@@ -76,6 +77,7 @@ class DocumentoController extends Controller
         $estados = Estado::all();
         $tipoDoc = tipoDocumento::all();
         $tipoTra = tipoTramite::all();
+        $referencias = Documento::all();
         
         return view('documentos.create',compact(
                     'materias',
@@ -84,34 +86,39 @@ class DocumentoController extends Controller
                     'roles',
                     'estados',
                     'tipoDoc',
-                    'tipoTra'
+                    'tipoTra',
+                    'referencias',
                 ));
     }
 
     public function store(Request $request)
     {
-        $archivo = $request->file;
-        $filename = time().'.'.$request->file->extension();
-        $contenido = file_get_contents($archivo);
-        $path = Storage::disk('minio')->put($filename,$contenido);
-        //$request->file->move(public_path('uploads/kardex/'),$filename);
-        //Agrega el documento al sistema
-        Documento::create([
-            'materia_id' => $request->materia_id,
-            'num_doc' => $request->num_doc,
-            'clasificacion' => $request->clasificacion,
-            'fecha_doc' => $request->fecha_doc,
-            'objeto' => $request->objeto,
-            'organizacion_id'=> Auth()->user()->Organizacion->id,
-            'tipo_documento_id'=> $request->tipo_documento_id,
-            'prefijo'=>$request->prefijo,
-            'ejemplares'=> $request->ejemplares,
-            'hojas'=>$request->hojas,
-            'tipo_tramite_id'=>$request->tipo_tramite_id,
-            'user_id'=> $request->firmante,
-            'impreso'=>($request->papel == 'on') ? 1 : 0,
-            'rutaArchivo'=>$filename,
-        ]);
+        try{
+            $archivo = $request->file;
+            $filename = time().'.'.$request->file->extension();
+            $contenido = file_get_contents($archivo);
+            $path = Storage::disk('minio')->put($filename,$contenido);
+            //Agrega el documento al sistema
+            Documento::create([
+                'materia_id' => $request->materia_id,
+                'num_doc' => $request->num_doc,
+                'clasificacion' => $request->clasificacion,
+                'fecha_doc' => $request->fecha_doc,
+                'objeto' => $request->objeto,
+                'organizacion_id'=> Auth()->user()->Organizacion->id,
+                'tipo_documento_id'=> $request->tipo_documento_id,
+                'prefijo'=>$request->prefijo,
+                'ejemplares'=> $request->ejemplares,
+                'hojas'=>$request->hojas,
+                'tipo_tramite_id'=>$request->tipo_tramite_id,
+                'user_id'=> $request->firmante,
+                'impreso'=>($request->papel == 'on') ? 1 : 0,
+                'rutaArchivo'=>$filename
+            ]);
+        }catch(Exception $ex){
+            Log::critical($ex);
+        }
+        
         $mensajeFinal = 'El usuario ['.Auth()->user()->Organizacion->sigla.'/'.Auth()->user()->rut. ']
                      Ha ingresado el documento['.$request->num_doc.']';
         event(new PrivateMessage(Auth::user(),'Documento Registrado','El Documento ha sido ingresado con exito.'));

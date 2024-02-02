@@ -1,5 +1,11 @@
 version: '3.8'
 services:
+  #PHP
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: digitalocean.com/php
   server:
     image: nginx:alpine
     restart: unless-stopped

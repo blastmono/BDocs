@@ -17,6 +17,7 @@ use App\Http\Controllers\LoginSecurityController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\BandejaController;
 use App\Http\Controllers\CalendarioController;
+use App\Http\Controllers\DigitalController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\TareasController;
 use App\Livewire\Counter;
@@ -185,6 +186,15 @@ Route::middleware(['2fa','auth','verified'])->group(function(){
     Route::post('/anuncios/create',[AnuncioController::class, 'store'])->name('anuncios.store');
     Route::get('anuncios/{id}',[AnuncioController::class, 'show'])->name('anuncios.show');
     Route::delete('/anuncios/{id}/delete',[AnuncioController::class, 'destroy'])->name('anuncios.destroy');
+});
+
+Route::middleware(['2fa','auth', 'verified'])->group(function(){
+    Route::get('/digital',[DigitalController::class, 'index'])->name('digitals.index');
+    Route::get('/digital/nuevo',[DigitalController::class, 'create'])->name('digitals.create');
+    Route::post('/digital/create',[DigitalController::class, 'store'])->name('digitals.store');
+    Route::get('digital/{id}',[DigitalController::class, 'show'])->name('digitals.show');
+    Route::get('/digital/{id}/edit',[DigitalController::class, 'edit'])->name('digitals.edit');
+    Route::delete('/digital/{id}/delete',[DigitalController::class, 'destroy'])->name('digitals.destroy');
 });
 
 

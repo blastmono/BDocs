@@ -6,6 +6,7 @@ use Filament\Facades\Filament;
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Authenticate extends Middleware
 {
@@ -25,8 +26,8 @@ class Authenticate extends Middleware
         $this->auth->shouldUse(Filament::getAuthGuard());
 
         /** @var Model $user */
-        $user = $guard->user();
-
+        //$user = $guard->user();
+        $user = Auth::user();
         $panel = Filament::getCurrentPanel();
 
         abort_if(
